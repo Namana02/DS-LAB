@@ -1,0 +1,132 @@
+#include <stdio.h>
+3. #define SIZE 50
+4. /*
+5. 1. Create stack of characters
+6. 2. Implement push() and pop()
+7. */
+8. char s[SIZE];
+9. int top=
+-1;
+10. void push(char elem)
+11.
+{
+12. s[++top]=elem;
+13.
+}
+14. char pop()
+15.
+{
+16. return(s[top--]);
+17.
+}
+18. void display(int k, char p[])
+19.
+{
+20. for (int i=0; i <= top; i++)
+21. printf("%c", s[i]);
+22. printf("
+\n");
+23. for (int i=0; i < k; i++)
+24. printf("%c", p[i]);
+25.
+}
+26. /*
+27. 1. Define precedences for the operators
+28. 2. The operators are +,
+-, *, /, ^
+29. 3. And lowest for '('
+30. 4. Return lowest as default.
+31. */
+32. int precedence(char elem)
+33.
+{
+34. switch(elem)
+35.
+{
+36. case '(': return 1;
+37. case '+':
+38. case '
+-': return 2;
+39. case '*':
+40. case '/':
+41. case '%': return 3;
+42. case '^': return 4;
+43. default: return 0;
+44.
+}
+45.
+}
+46. /*
+47. 1. Input is infix expression
+48. 2. Output is postfix e* 6
+49. 3. Push the marker '
+\0'
+50. 4. Handle parens, operators and operands
+51. */
+52. void convert(char infix[], char postfix[])
+53.
+{
+54. char ch;
+55. int k=0;
+56. push('
+\0'); // null marker
+57. for (int i=0; infix[i]; i++)
+58.
+{
+59. ch = infix[i];
+60. switch(ch)
+61.
+{
+62. case '(':
+63. push(ch);
+64. break;
+65. case ')':
+66. while((ch = pop()) != '(')
+67.
+{
+68. postfix[k++] = ch;
+69.
+}
+70. break;
+71. case '+':
+72. case '
+-':
+73. case '/':
+74. case '*':
+75. case '%':
+76. case '^':
+77. while(precedence(ch) <= precedence(s[top]))
+78.
+{
+79. postfix[k++]=pop();
+80.
+}
+81. push(ch);
+82. break;
+83. default:
+84. postfix[k++]=ch;
+85.
+}
+86. //display(k, postfix);
+87.
+}
+88. // empty stack into postfix
+89. // Check if '
+\0' is at bottom of the stack
+90. while((postfix[k++] = pop()) != '
+\0');
+91.
+}
+92. /
+93. 1. Declare infix and postfix arrays
+94. 2. Read infix expression
+95. 3. Convert infix to postfix expression
+96. */
+97. int main()
+98. {
+99. char infix[100];
+100. char postfix[100];
+101. printf("Enter the Infix Expression: ");
+102. gets(infix);
+103. convert(infix, postfix);
+104. printf("Postfix Expn: %s\n", postfix);
