@@ -1,0 +1,112 @@
+1. #include<stdio.h>
+Design and Develop Program in C for the implementation of Queue Using Linked List
+2. #include<stdlib.h>
+3. struct node
+4. {
+5. int data;
+6. struct node *next;
+7. };
+8. struct node *front;
+9. struct node *rear;
+10. void insert();
+11. void delete();
+12. void display();
+13. void main ()
+14. {
+15. int choice;
+16. while(choice != 4)
+17. {
+18. printf("\n**Main Menu\n");
+19. printf("\n=======================================================
+==========\n");
+20. printf("\n1.insert an element\n2.Delete an element\n3.Display the queue\n4.Exit\n");
+21. printf("\nEnter your choice ?");
+22. scanf("%d",& choice);
+23. switch(choice)
+24. {
+25. case 1:
+26. insert();
+27. break;
+28. case 2:
+29. delete();
+30. break;
+31. case 3:
+73
+Data Structures Lab REVA University
+32. display();
+33. break;
+34. case 4:
+35. exit(0);
+36. break;
+37. default:
+38. printf("\nEnter valid choice??\n");
+39. }
+40. }
+41. }
+42. void insert()
+43. {
+44. struct node *ptr;
+45. int item;
+46.
+47. ptr = (struct node *) malloc (sizeof(struct node));
+48. if(ptr == NULL)
+49. {
+50. printf("\nOVERFLOW\n");
+51. return;
+52. }
+53. else
+54. {
+55. printf("\nEnter value?\n");
+56. scanf("%d",&item);
+57. ptr -> data = item;
+58. if(front == NULL)
+59. {
+60. front = ptr;
+61. rear = ptr;
+62. front -> next = NULL;
+63. rear -> next = NULL;
+64. }
+65. else
+66. {
+74
+Data Structures Lab REVA University
+67. rear -> next = ptr;
+68. rear = ptr;
+69. rear->next = NULL;
+70. }
+71. }
+72. }
+73. void delete ()
+74. {
+75. struct node *ptr;
+76. if(front == NULL)
+77. {
+78. printf("\nUNDERFLOW\n");
+79. return;
+80. }
+81. else
+82. {
+83. ptr = front;
+84. front = front -> next;
+85. free(ptr);
+86. }
+87. }
+88. void display()
+89. {
+90. struct node *ptr;
+91. ptr = front;
+92. if(front == NULL)
+93. {
+94. printf("\nEmpty queue\n");
+95. }
+96. else
+97. { printf("\nprinting values .....\n");
+98. while(ptr != NULL)
+99. {
+100. printf("\n%d\n",ptr -> data);
+ptr = ptr -> next;
+101. 75
+Data Structures Lab REVA University
+102. }
+103. }
+104. }
