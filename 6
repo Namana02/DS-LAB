@@ -1,0 +1,41 @@
+define MAX_SIZE 100
+2. int queue[MAX_SIZE];
+3. int front = -1;
+4. int rear = -1;
+5. void enqueue(int element) {
+6. if (rear == MAX_SIZE - 1) {
+7. printf("Queue is full");
+8. return;
+9. }
+10. if (front == -1) {
+11. front = 0;
+12. }
+13. rear++;
+14. queue[rear] = element;
+15. }
+16.
+17. int dequeue() {
+18. if (front == -1 || front > rear) {
+19. printf("Queue is empty");
+20. return -1;
+21. }
+22. int element = queue[front];
+23. front++;
+24. return element;
+25. }
+26.
+Data Structures Lab REVA University
+27. int main() {
+28. enqueue(10);
+29. enqueue(20);
+30. enqueue(30);
+31. printf("%d "
+, dequeue());
+32. printf("%d "
+, dequeue());
+33. printf("%d "
+, dequeue());
+34. printf("%d "
+, dequeue());
+35. return 0;
+36. ⁠}
