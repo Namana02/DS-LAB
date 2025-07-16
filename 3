@@ -1,0 +1,129 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define SIZE 10
+int stack[SIZE];
+int top =
+-1;
+/*
+1. Input is item
+2. Check stackfull condition
+3. Increment top
+4. Store item in the stack
+*/
+void push(int item) {
+if (top != SIZE
+-1)
+{
+stack[++top]=item; }
+else printf("Stack Overflow
+\n");
+}
+/*
+1. Output is item
+2. Check stack empty condition
+3. Remove item in the stack
+4. Decrement the top
+*/
+int pop() {
+if (top !=
+-1)
+{
+return(stack[top--]); }
+else printf("Stack Underflow
+\n");
+}
+/*
+1. Check stack empty condition
+2. Print all the items on the stack
+*/
+void display() {
+if (top ==
+-1)
+{
+printf("Stack EMPTY
+\n");
+return; }
+printf("The Stack status is
+\n");
+for(int i=top; i >= 0; i--
+)
+{
+printf("%d
+\n", stack[i]);
+}}
+/*
+1. Read a number
+2. Convert number to string 's'
+3. Push the string chars on to the stack
+4. Pop the stack chars into 'r'
+5. Compare 's' and 'r' to decide palindrome
+*/
+void palindrome() {
+int d;
+char s[10];
+printf("Enter number for palindrome check: ");
+scanf("%s", s);
+int n = 0;
+for (int i=0; s[i]; i++) {
+d = s[i]
+- '0';
+n = n*10 + d;
+push(d); }
+int r = 0;
+while (top !=
+-1)
+{
+d = pop();
+r = r*10 + d; }
+if ( r == n)
+printf("Palindrome number
+\n");
+else
+printf("Not Palindrome number
+\n");
+}
+/*
+1. Read and push the item
+*/
+void insert() {
+int item;
+printf("Enter item to be pushed: ");
+scanf("%d", &item);
+push(item); }
+/*
+1. Pop and print the item
+*/
+void delete() {
+int item;
+item = pop();
+printf("Popped element is %d
+\n", item);
+}
+int main( ) {
+int choice;
+struct MENU {
+char *name; void (*func)();
+} menu[] = {
+{"Done", exit},
+{"Push", insert},
+{"Pop", delete},
+{"Display", display},
+{"Palindrome", palindrome}
+};
+int size = sizeof(menu)/sizeof(menu[0]);
+for(;;) {
+printf("
+\
+n-------Stack Menu-------
+\n");
+for(int i=1; i < size; i++) {
+printf("%d. %s
+\n", i, menu[i].name);
+}
+printf("---------------------------------
+\n");
+printf("Enter your choice: ");
+scanf("%d", &choice);
+menu[choice].func(); }
+return 0; }
